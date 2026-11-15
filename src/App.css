@@ -1,0 +1,480 @@
+.portfolio {
+  --creme: #f6f4e9;
+  --green: #193e30;
+  --rule: color-mix(in srgb, var(--green) 24%, var(--creme));
+  --tint: color-mix(in srgb, var(--green) 9%, var(--creme));
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--green);
+  background: var(--creme);
+  font: 1rem/1.55 "DM Sans", "Segoe UI", sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.portfolio main {
+  flex: 1;
+  min-width: 0;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 2;
+  inset: 0.5rem auto auto 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--creme);
+}
+
+.skip-link:not(:focus) {
+  clip-path: inset(50%);
+}
+
+.shell {
+  width: min(100% - 3rem, 74rem);
+  margin-inline: auto;
+}
+
+.site-header,
+.site-footer,
+.site-header nav,
+.wordmark {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-header,
+.site-footer {
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-block: 1.25rem;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-header nav {
+  gap: 0 1.5rem;
+}
+
+.menu-toggle {
+  display: none;
+  min-height: 44px;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.site-header a,
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 0.3rem;
+  text-decoration: none;
+}
+
+.site-footer a {
+  gap: 0.35rem;
+}
+
+.site-header [aria-current="page"],
+.site-footer [aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.site-header a:hover,
+.site-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.wordmark {
+  gap: 0.55rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.brand-mark {
+  width: 1.1rem;
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px var(--creme);
+  background: var(--green);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding-block: clamp(2.5rem, 7vw, 6rem);
+}
+
+.portfolio h1,
+.portfolio h2,
+.portfolio h3,
+.portfolio p {
+  margin: 0;
+}
+
+.portfolio h1,
+.portfolio h2 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.portfolio h1 {
+  font-size: clamp(3rem, 12vw, 10.5rem);
+  letter-spacing: -0.085em;
+}
+
+.hero-copy p {
+  max-width: 40ch;
+  margin-top: 1.4rem;
+  font-size: 1.125rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-inline-size: 100%;
+  margin-top: 1.75rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--green);
+  border-radius: 2rem;
+  background: var(--green);
+  color: var(--creme);
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--tint);
+  color: var(--green);
+}
+
+.portfolio .button:focus-visible {
+  outline-color: var(--green);
+}
+
+.hero-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1.2;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 49.75%, var(--rule) 50%, transparent 50.25%),
+    linear-gradient(transparent 49.75%, var(--rule) 50%, transparent 50.25%),
+    radial-gradient(circle at 45% 40%, var(--creme), var(--tint) 70%, var(--rule));
+}
+
+.orbit {
+  position: relative;
+  width: 65%;
+  aspect-ratio: 1;
+}
+
+.sphere,
+.satellite,
+.orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.sphere {
+  inset: 20%;
+  background: radial-gradient(
+    circle at 34% 27%,
+    color-mix(in srgb, var(--green) 40%, var(--creme)),
+    var(--green) 62%,
+    color-mix(in srgb, var(--green) 45%, black)
+  );
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--green) 28%, transparent);
+}
+
+.orbit-ring {
+  inset: 23% -7%;
+  border: 1px solid var(--green);
+}
+
+.orbit-ring--wide {
+  transform: rotate(-27deg);
+}
+
+.orbit-ring--tall {
+  transform: rotate(55deg);
+  opacity: 0.55;
+}
+
+@property --orbit-progress {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.satellite {
+  --ring-rotation: -27deg;
+  --crossing-angle: 61.4135deg;
+  --orbit-angle: calc(var(--orbit-progress) + var(--crossing-angle));
+  --orbit-x: calc(57% * cos(var(--orbit-angle)));
+  --orbit-y: calc(27% * sin(var(--orbit-angle)));
+  left: calc(50% + var(--orbit-x) * cos(var(--ring-rotation)) - var(--orbit-y) * sin(var(--ring-rotation)));
+  top: calc(50% + var(--orbit-x) * sin(var(--ring-rotation)) + var(--orbit-y) * cos(var(--ring-rotation)));
+  transform: translate(-50%, -50%);
+  width: 7%;
+  aspect-ratio: 1;
+  background: var(--green);
+  box-shadow: 0 0 0 4px var(--tint);
+  animation: orbit-travel 12s linear infinite, orbit-switch 12s steps(1) infinite;
+}
+
+@keyframes orbit-travel {
+  to { --orbit-progress: 720deg; }
+}
+
+@keyframes orbit-switch {
+  /* Switch rings where the two ellipses intersect. */
+  50% {
+    --ring-rotation: 55deg;
+    --crossing-angle: -61.4135deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .satellite {
+    animation: none;
+  }
+}
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+  gap: 1.5rem;
+  padding-block: clamp(2rem, 5vw, 4rem);
+  border-top: 1px solid var(--rule);
+}
+
+.portfolio h2 {
+  font-size: clamp(2.65rem, 5vw, 4.25rem);
+  letter-spacing: -0.065em;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0.55rem 0 0 1.25rem;
+}
+
+.leaders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.leader {
+  padding: 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
+  background: var(--tint);
+}
+
+.leader h3 {
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.leader p {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.leader-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.leader-profile img {
+  width: clamp(4rem, 16vw, 6rem);
+  height: auto;
+  flex: none;
+  border-radius: 0.5rem;
+}
+
+.leader-profile-label {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.leader--with-introduction {
+  grid-column: 1 / -1;
+}
+
+.leader-introduction {
+  max-width: 65ch;
+  margin-top: 1rem;
+}
+
+.leader-introduction p + p {
+  margin-top: 0.75rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+
+.content-page {
+  max-width: 46rem;
+  padding-block: clamp(2rem, 6vw, 5rem);
+}
+
+.content-page h1 {
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.065em;
+}
+
+.content-page h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.content-page p {
+  margin-top: 0.85rem;
+}
+
+.content-page .page-label {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.policy h2 {
+  margin-top: 2rem;
+}
+
+.status-card {
+  margin-top: 1.5rem;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
+  background: var(--tint);
+}
+
+@media (max-width: 44rem) {
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .site-header nav {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .site-header nav[data-open="true"] {
+    display: grid;
+  }
+
+  .site-header nav a + a {
+    border-top: 1px solid var(--rule);
+  }
+
+  .hero,
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-art {
+    aspect-ratio: 1.5;
+  }
+
+  .orbit {
+    width: 51%;
+  }
+}
+
+@media (max-width: 30rem) {
+  .shell {
+    width: calc(100% - 2rem);
+  }
+
+  .leaders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+}
+
+.hero-copy h1 {
+  margin-top: 0.5rem;
+  font-size: clamp(3.25rem, 7.2vw, 7rem);
+  letter-spacing: -0.07em;
+}
+
+.page-label {
+  font-weight: 700;
+}
+
+.service-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.service-card a,
+.feature-list a,
+.page-label a {
+  text-underline-offset: 0.2em;
+}
+
+.faq-list details {
+  border-bottom: 1px solid var(--rule);
+  padding-block: 0.75rem;
+}
+
+.faq-list summary {
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 1.5rem;
+}
+
+.faq-list p {
+  margin: 0.6rem 0 0.35rem;
+}
+
+#leadership,
+#faq {
+  scroll-margin-top: 1rem;
+}
+
+@media (max-width: 44rem) {
+  html:not(.js-ready) .site-header nav {
+    display: flex;
+  }
+
+  html:not(.js-ready) .site-header .menu-toggle {
+    display: none;
+  }
+}
+
